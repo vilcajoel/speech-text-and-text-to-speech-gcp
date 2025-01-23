@@ -5,7 +5,7 @@ Este es un proyecto creado en Google Cloud con el cual mediante una aplicación 
 **⚠️ Importante:** Este proyecto debe ejecutarse exclusivamente en el entorno de **Cloud Shell** de Google Cloud para garantizar la correcta instalación de dependencias y acceso a las credenciales de servicio.
 
 
-![App Screenshot](https://github.com/vilcajoal/speech-text-and-text-to-speech-gcp/blob/main/WebApp.png?raw=true)
+![App Screenshot](https://github.com/vilcajoel/speech-text-and-text-to-speech-gcp/blob/main/WebApp.png?raw=true)
 
 ---
 
