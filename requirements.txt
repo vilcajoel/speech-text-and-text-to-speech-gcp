@@ -1,5 +1,4 @@
 Flask==3.0.0
-google-cloud-texttospeech==2.14.1
-google-cloud-speech==2.21.0
+google-cloud-texttospeech==2.24.0
+google-cloud-speech==2.30.0
 gunicorn==21.2.0
-pydub

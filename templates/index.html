@@ -96,12 +96,13 @@
                 audioChunks.push(event.data);
             };
             mediaRecorder.start();
+            document.getElementById('transcription-result').innerText = "Empezó la grabación"
         }
 
         function stopRecording() {
             mediaRecorder.stop();
             mediaRecorder.onstop = async () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
                 const formData = new FormData();
                 formData.append('audio', audioBlob);
                 
@@ -111,6 +112,7 @@
                 });
                 const result = await response.json();
                 document.getElementById('transcription-result').innerText = `Texto transcrito: ${result.transcript}`;
+                audioChunks = [];
             };
         }
     </script>

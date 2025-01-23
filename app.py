@@ -33,7 +33,7 @@ def audio_to_text(audio_content):
         language_code="es-ES"
     )
     response = client.recognize(config=config, audio=audio)
-    transcript = " ".join([result.alternatives[0].transcript for result in response.results])
+    transcript = [result.alternatives[0].transcript for result in response.results]
     return transcript
 
 @app.route('/')
