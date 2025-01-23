@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Texto y Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        audio {
+            margin-top: 20px;
+            width: 100%;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #transcription-result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-left: 5px solid #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversión de Texto a Audio</h1>
+    <form action="/convert" method="post">
+        <label for="text">Escribe el texto que deseas convertir a audio:</label><br>
+        <textarea id="text" name="text" rows="5" cols="50"></textarea><br>
+    
+        <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
+            <label for="ssml_gender">Género de voz:</label>
+            <select id="ssml_gender" name="ssml_gender">
+                <option value="NEUTRAL">Neutral</option>
+                <option value="FEMALE">Femenina</option>
+                <option value="MALE">Masculina</option>
+            </select>
+    
+            <label for="speaking_rate">Velocidad de habla:</label>
+            <select id="speaking_rate" name="speaking_rate">
+                <option value="0.5">Lenta</option>
+                <option value="1.0" selected>Normal</option>
+                <option value="2.0">Rápida</option>
+            </select>
+        </div>
+    
+        <button type="submit" style="margin-top: 20px;">Convertir a Audio</button>
+    </form>
+    
+    {% if audio_data %}
+        <h2>Reproducción del Audio:</h2>
+        <audio controls>
+            <source src="data:audio/mp3;base64,{{ audio_data }}" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    {% endif %}
+
+    <h1>Conversión de Audio a Texto</h1>
+    <button onclick="startRecording()">Iniciar Grabación</button>
+    <button onclick="stopRecording()">Detener Grabación</button>
+    <p id="transcription-result"></p>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+
+        async function startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+            mediaRecorder.start();
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const formData = new FormData();
+                formData.append('audio', audioBlob);
+                
+                const response = await fetch('/transcribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                document.getElementById('transcription-result').innerText = `Texto transcrito: ${result.transcript}`;
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+# General
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# Entorno virtual
+venv/
+.env
+*.env
+
+# Archivos de configuración de sistema
+*.log
+*.sqlite3
+instance/
+
+# Credenciales y configuraciones sensibles
+*.json
+!settings.example.json
+GOOGLE_APPLICATION_CREDENTIALS
+
+# Dependencias
+*.egg-info/
+.eggs/
+
+# Archivos de compilación
+*.so
+*.o
+*.a
+*.out
+*.class
+
+# Archivos de editor/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Archivos de despliegue
+*.bak
+nohup.out
+
+# Archivos generados
+__generated__/
+coverage/
+htmlcov/
+
+# Archivos específicos de Cloud
+.cloudshell/
+
+# Archivos de pruebas
+pytest_cache/
+*.pytest_cache
+
+# Archivos de Docker
+*.dockerignore
+Dockerfile
+
+# Archivos de instalación
+*.lock
+node_modules/
+
+# Archivos de compilación de Flask
+*.db
+*.pid
+*.seed
+*.dump
+
