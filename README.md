@@ -138,8 +138,8 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para má
 
 Para preguntas o sugerencias, contáctame en:
 - ✉️ Email: joelvilcatarazona@gmail.com
-- 🔗 LinkedIn: [tu_perfil](https://www.linkedin.com/in/joelvilca/)
-- 🐙 GitHub: [tu_usuario](https://github.com/vilcajoel)
+- 🔗 LinkedIn: [https://www.linkedin.com/in/joelvilca/](https://www.linkedin.com/in/joelvilca/)
+- 🐙 GitHub: [https://github.com/vilcajoel](https://github.com/vilcajoel)
 
 ---
 
